@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 
 
 const app = express();
+const api_key = "1865697a58b84a44b469a378afb64499";
 
 // Enable CORS for all routes
 app.use(cors());
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 
 // Using the server-side proxy approach with Express, as shown in the examples, should solve the CORS issues without needing to modify any CORS settings directly in the browser or frontend.
 
-const api_key = "1865697a58b84a44b469a378afb64499";
+
 
 app.post('/searchStation', async (req, res) => {
 
@@ -28,6 +29,18 @@ app.post('/searchStation', async (req, res) => {
     
   } catch (error) {
     res.status(500).json({ error: 'An error occurred in /searchStation' });
+  }
+});
+
+// New route to fetch timetable for a stop
+app.get('/getTimetable', async (req, res) => {
+  const stopId = req.query.stopId;
+  try {
+    const apiResponse = await fetch(`https://api.resrobot.se/v2.1/departureBoard?format=json&id=${stopId}&accessId=${api_key}`);
+    const data = await apiResponse.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while fetching timetable' });
   }
 });
 
