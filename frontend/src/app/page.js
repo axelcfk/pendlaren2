@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import SpecificStopDepartures from "./Specificstopdepartures";
+import StopTimetable from "./StopTimeTable";
 
 export const api_key = "1865697a58b84a44b469a378afb64499";
 
@@ -25,6 +26,7 @@ export default function Home() {
       <p>{latitude && "Your latitude is:" + " " + latitude}</p>
       <p>{longitude && "Your longitude is:" + " " + longitude}</p>
       <SpecificStopDepartures/>
+      <StopTimetable></StopTimetable>
     </main>
   );
 }
