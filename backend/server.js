@@ -13,9 +13,6 @@ app.use(bodyParser.json());
 
 
 // Using the server-side proxy approach with Express, as shown in the examples, should solve the CORS issues without needing to modify any CORS settings directly in the browser or frontend.
-
-
-
 app.post('/searchStation', async (req, res) => {
 
   const { searchString } = req.body;
@@ -66,6 +63,7 @@ app.post('/siteInformation', async (req, res) => {
     res.status(500).json({ error: 'An error occurred in /stationDepartures' });
     
   }
-})
+});
+
 
 app.listen(3001, () => console.log('Server running on http://localhost:3001'));
